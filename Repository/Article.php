@@ -582,8 +582,9 @@ class Article extends EntityRepository
         ]);
 
         $preparedDBStatment = $this->getEntityManager()->getConnection()->prepare($nativeQuery);
-        $preparedDBStatment->execute();
-        $feedbackCollection = $preparedDBStatment->fetchAll();
+        // $preparedDBStatment->execute();
+        // $feedbackCollection = $preparedDBStatment->fetchAll();
+        $feedbackCollection = $preparedDBStatment->executeQuery()->fetchAllAssociative();
 
         if (!empty($feedbackCollection)) {
             $response['collection'] = array_map(function($feedback) {
